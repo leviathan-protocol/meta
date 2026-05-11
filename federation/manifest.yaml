@@ -1,0 +1,196 @@
+# Federation Constitution Manifest
+# leviathan-meta is itself a Leviathan instance — the Federation/Coordination Leviathan.
+# This manifest declares its constitutional state.
+
+instance:
+  name: "leviathan-meta"
+  designation: "federation-coordinator"
+  domain: "federation / coordination / sovereign-console"
+  owner_machine: "founder primary mac (this Mac)"
+  created: "2026-05-05"
+  last_updated: "2026-05-05"
+
+# Kernel inheritance
+inheritance:
+  forked_from: "leviathan-kernel@v0.1.0"
+  inherits_from: null   # the federation Leviathan does not inherit from a parent constitution
+                        # (it sits beside master, not below)
+  re_anchor_seam: false # not applicable — federation is structurally distinct from substantive instances
+  is_federation_coordinator: true
+  is_master_candidate: false   # master is companion's POS, not this
+
+# This federation's own constitution (4-layer)
+federation_constitution:
+  terms_file: "federation/terms.md"
+  principles_file: "federation/principles.md"
+  rules_file: "federation/rules.md"
+  meta_rules_file: "federation/meta-rules.md"
+
+  version: "0.1.0"
+  snapshot_hash: "TBD"   # computed via federation conformance tool when available
+  last_constitutional_change: "2026-05-05"
+
+# Element counts (federation's own)
+element_counts:
+  terms: 13                  # see federation/terms.md §2
+  principles: 10             # see federation/principles.md §2
+  rules: 17                  # see federation/rules.md §2-§7
+  meta_rules: 13             # see federation/meta-rules.md §2-§7
+
+# Tiers
+tiers_present:
+  - immutable
+  - protected
+  - mutable
+
+# Capability classes the federation operates at
+# (federation does mostly observation_only + advisory_proposal — coordination not action)
+capability_classes:
+  - observation_only           # status visibility
+  - advisory_proposal          # briefings as proposals
+  - bounded_validation         # conformance checks
+  - policy_write               # federation amendments (constrained by meta-rules)
+
+# What federation does NOT operate at
+capability_classes_excluded:
+  - sensitive_active           # never — federation does not slash, penalize, or revoke
+  - annex_special_mode         # never — no privileged operations
+  - authority_effect           # never — federation does not change real-world state directly
+
+# Maturity gates
+maturity_gates:
+  - "principle:p_6_sovereign_console_discipline"   # observability, not control
+  - "principle:p_8_instance_sovereignty_outranks"  # instance always wins
+
+# Falsification commitments
+falsification:
+  - claim: "Federation rules are honored by member instances"
+    refuted_if: "An instance commits structural changes outside its owned subdirectory without coordination, and the violation is not surfaced via discrepancy report — silent override happening at scale"
+  - claim: "Federation evolves via reasoned amendment, not stealth"
+    refuted_if: "A protected rule is amended without briefing or with reasoning artifact missing, and the amendment lands in main without challenge"
+  - claim: "Federation visibility does not become control"
+    refuted_if: "Founder uses leviathan-meta to enforce specific instance behavior beyond status reporting, undermining P-6"
+
+# Decentralization status (kernel/03-constellation.md §5)
+decentralization_path:
+  criterion_1_first_fork: false
+  criterion_2_three_validators: false
+  criterion_3_seven_subnet: false
+  criterion_4_amendment_accepted: false
+  criterion_5_lesson_ledger_traffic: false
+  founder_arbitration_active: true   # MR-10 in effect
+
+# Currently registered member instances (synced from instance subdirectories)
+members:
+  - id: "companion"
+    role: "master-leviathan-candidate"
+    status_file: "companion/status.md"
+    manifest_file: "companion/manifest-public.yaml"
+
+  - id: "liveprob"
+    role: "trade specialty (Polymarket)"
+    status_file: "liveprob/status.md"
+    manifest_file: "liveprob/manifest.yaml"   # TBD — placeholder
+
+  - id: "security"
+    role: "security domain — typed security control plane (origin of 8-class capability taxonomy + action governance extensions + decision/effect gap framework)"
+    status_file: "security/status.md"
+    manifest_file: "security/manifest.yaml"   # filed 2026-05-08 (Companion-authored placeholder pending Mac Mini handover)
+    architectural_notes: |
+      Security Leviathan is the federation's only local-first, manual-operator-driven
+      instance. Architecturally most sophisticated (originated multiple kernel
+      patterns adopted in kernel/10-tasks.md §4) but currently LEAST kernel-
+      integrated (anchor declaration TODO, snapshot_hash not computed). Migration
+      v4 is the bridge to formal federation integration. AI boundary is deliberate
+      — "no automated AI runtime" is design choice for defensive-domain risk
+      profile, not temporary state. Mac Mini single-machine, single-operator.
+
+  - id: "tasma"
+    role: "animal welfare beachhead (classical) / Animal Welfare anayasal (planned)"
+    status_file: "tasma/status.md"
+    manifest_file: "tasma/manifest.yaml"   # TBD — placeholder
+
+  - id: "atlas"
+    role: "digital twin (background, formalization deferred)"
+    status_file: "atlas/status.md"
+    manifest_file: null   # TBD — Atlas not yet formalized
+
+  - id: "tribun"
+    role: "global multi-sport fan-governance platform (inversion-Constitutional-Company beachhead candidate — fans replace club management)"
+    status_file: "tribun/status.md"
+    manifest_file: "tribun/manifest.yaml"
+    architectural_notes: |
+      Tribün is server-mediated (NestJS backend + PostgreSQL + Redis + Socket.io,
+      React Native mobile) — counterpoint to ANIMA's on-device sovereignty. Real-time
+      WebSocket community engagement is core. LLM-based content moderation as
+      governance-enforcement infrastructure pattern reference.
+
+      Radical thesis: fans REPLACE classical club management (not just engage).
+      Sport-agnostic + geography-agnostic architecture target; codebase v0 launches
+      on Turkish football. Architectural target is global, multi-sport,
+      wherever-fans-are-structurally-subordinated.
+
+      Dual-entity pattern (declared 2026-05-08, parallel to Tasma → Animal Welfare):
+      Tribün (product, classical SaaS) + Fan-DAO (planned Constitutional Company,
+      pre-genesis). Inversion-Constitutional-Company classification — replaces
+      existing power hierarchy (classical club ownership/board) rather than
+      building new structure where none existed. Per-club first-fork pattern
+      (single opt-in club, not league-wide).
+
+  - id: "fast"
+    role: "live financial execution — Backpack maker-only Rust trading bot (sibling of Liveprob; Mac Mini Liveprob+Fast duo)"
+    status_file: "fast/status.md"
+    manifest_file: "fast/manifest.yaml"
+    architectural_notes: |
+      Fast is the federation's only live-money execution instance. Sibling of
+      Liveprob (paper-only Polymarket; Fast = live Backpack). Both Mac Mini-
+      resident, both Financial Leviathan instances, different markets and
+      execution primitives. Constitution at constitution/v0/ is structurally
+      4-layer (terms/principles/rules/meta_rules) from inception — federation-
+      ready by design.
+
+      Safety-critical Rust trading code with non-negotiable invariants encoded
+      as constitutional immutables: maker-only normal execution, maker-fee==0,
+      controller-owned exits, strategies intent-only, src/main.rs dispatch-only,
+      state transition discipline through Cancelling → Reconciling.
+
+      Codex-paired collaboration canonical reference (.codex/skills/ + AGENTS.md
+      canonical pattern for multi-vendor agent collaboration on single codebase).
+      AGENT_CLI=codex profile canonical reference per Phase 1 multi-machine
+      rollout briefing (codex-acp Q10 2-vendor canary instance).
+
+      Phase A docs-only constitution maturing toward Phase B runtime enforcement
+      via stable rule IDs in Rust validation errors and PnL-gate rejection
+      messages. Operating model: "Agents propose and build. Controller executes.
+      Constitution gates. Archive proves."
+
+  - id: "anima"
+    role: "consumer-facing personal governance Android app (mass-distribution instance, on-device sovereign)"
+    status_file: "anima/status.md"
+    manifest_file: "anima/manifest.yaml"   # filed 2026-05-08 (dual-mode roadmap declaration)
+    architectural_notes: |
+      ANIMA is template + sovereign-end-user-instances pattern. The codebase is ONE
+      member; thousands of end-user installations are each their own sovereign
+      sub-instance. This is the federation's primary mass-recruitment vector.
+      Belief schema (CONCEPT/AXIOM/DIRECTIVE/EPISODE/SHADOW) maps directly to
+      POS structure (kavram/prensip/eylem/episode/gölge) — convergent design
+      validating kernel structure.
+
+      Dual-mode roadmap (2026-05-08): journal mode (current, active beta) → journal +
+      dating mode (planned, single app). Dating layer = Cognitive Entanglement (CE)
+      Trojan Horse pattern: belief-compatibility match instead of photo-swipe. Both
+      modes share same on-device SLM, same 5-element schema, same Memory Map /
+      Time Travel / Shadow Detection. Mode is UX surface, not architectural fork.
+
+# Notes
+notes: |
+  This manifest is the federation Leviathan's snapshot. It declares what
+  this Leviathan IS — its constitution, its members, its falsification
+  commitments.
+
+  Updates trigger: federation rule amendments, new member instances joining,
+  status field changes. Each update bumps version per MR-12 and adds CHANGELOG
+  entry per MR-7.
+
+  This file is itself protected by the rules it describes. Amendments to
+  this manifest follow MR-2 (protected rules — briefing + 7-day window).

@@ -1,0 +1,163 @@
+# Leviathan-meta .gitignore — strict secrets exclusion
+# This repo holds public-safe documentation, status manifests, and contracts.
+# Anything sensitive must be excluded BEFORE it reaches git history.
+
+# ==============================================================================
+# Hard exclusions — never commit these regardless of context
+# ==============================================================================
+
+# Cryptographic material
+*.key
+*.pem
+*.p12
+*.pfx
+*-private.pem
+secrets/
+.secrets/
+secret/
+
+# Wallet files
+wallet*.json
+*.wallet
+keystore/
+keystores/
+private-keys/
+
+# Environment / config with secrets
+.env
+.env.*
+!.env.example
+.envrc
+config-secrets.yaml
+config-private.yaml
+
+# API tokens
+.npmrc
+.pypirc
+*.token
+*-token
+github-token*
+api-keys*
+
+# ==============================================================================
+# Instance-specific sensitive data (never sync to meta repo)
+# ==============================================================================
+
+# Liveprob raw decisions / wallet data
+data/decisions.yaml
+data/sidecar_audit.log
+data/agent_audit.log
+memory/decisions.yaml
+memory/wallets.yaml
+memory/raw/
+tracker.db
+tracker.db-*
+*.sqlite
+*.db
+
+# Companion / personal POS sensitive layers
+bible/
+sessions/
+memory/indexed/chunk-*.md
+openpos/my-pos/golgeler/
+openpos/my-pos/people/
+openpos/my-pos/alignment-log.yaml
+openpos/my-pos/alignment-history.yaml
+
+# Security Leviathan sensitive findings
+*threat-intel*
+*threat_intel*
+*vuln-finding*
+*vulnerability-detail*
+*forensic-record*
+opnsense-keys/
+network-topology-private/
+
+# ==============================================================================
+# Personal communication
+# ==============================================================================
+
+# Letters, private notes
+*-private.md
+*PRIVATE*
+notes/anne-baba*
+notes/yarin-tartisma-kuyrugu*
+*-personal.md
+
+# Therapy / personal session content
+*therapy*
+*session-log*
+
+# ==============================================================================
+# Build artifacts / OS noise
+# ==============================================================================
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.claude/
+.cursor/
+
+# Build outputs
+node_modules/
+dist/
+build/
+target/
+.next/
+out/
+*.pyc
+__pycache__/
+.pytest_cache/
+.tox/
+
+# Python
+*.egg-info/
+.coverage
+htmlcov/
+.mypy_cache/
+
+# Logs
+*.log
+logs/
+
+# ==============================================================================
+# Documentation generation outputs (only commit sources)
+# ==============================================================================
+
+# If a doc is generated, exclude it (keep the generator)
+*-generated.md
+*-compiled.md
+_generated/
+_compiled/
+
+# ==============================================================================
+# Honest notes
+# ==============================================================================
+
+# This .gitignore is the FIRST line of defense. Second line: pre-commit hook
+# (gitleaks, trufflesecrets, or equivalent). Third line: human review on every
+# diff before push.
+#
+# If you are unsure whether something belongs in this repo, default to NO.
+# Ask in a briefing or via direct communication. It's easier to add later than
+# to scrub git history.
+
+# Federation reconciliation runtime artifacts (derived; never commit)
+# These are cron log + edge cases where script writes to wrong dir
+.federation-summary.json
+.federation-pull.log
+.cron-pull.log
+.federation-alert.log
+tools/acp/node_modules/

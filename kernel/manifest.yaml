@@ -1,0 +1,474 @@
+# manifest.yaml — Kernel Structural Manifest
+#
+# Machine-readable graph of the kernel: parts, specs, tools, invariants, and
+# the structurally load-bearing terms with their cross-references.
+#
+# What this is: the part-list, the invariant assertion/enforcement map, the
+# term dependency graph. Used by tools/conformance.py for graph-level checks
+# beyond the regex-only invariant check, and by future maintainers to ask
+# questions like "which parts cite I-2?" or "what depends on the Magistrate
+# term?".
+#
+# What this is NOT: a duplicate of glossary.md. Term DEFINITIONS live in
+# glossary.md only. This manifest stores ONLY the graph (depends_on,
+# appears_in, asserted_in). One source of truth per fact.
+#
+# What this is NOT: an evolution log. Per-element history lives in
+# CHANGELOG.md. This manifest stores only the CURRENT version snapshot.
+#
+# Update rule: every CHANGELOG.md entry that bumps a part version must update
+# the corresponding `version:` field here in the same patch. Conformance
+# checks for drift between these and the headers of the part files.
+#
+# Document version: 0.1.0
+# Tier: protected
+# Last touched: 2026-05-04
+
+manifest_version: "0.2.0"
+last_touched: "2026-05-04"
+phase: build  # build | steady-state — see kernel/04-living.md §6
+
+# ---------------------------------------------------------------------------
+# parts: the kernel's first-class documents.
+# Tier values: meta | protected. (No mutable kernel parts in v0.1.0.)
+# ---------------------------------------------------------------------------
+parts:
+  - id: 00-meta
+    file: kernel/00-meta.md
+    version: "0.1.0"
+    tier: meta
+    role: "Meta-rules layer for the kernel itself."
+    asserts: [I-1, I-2, I-3, I-4, I-5, I-6, I-7]
+    depends_on: []
+
+  - id: 01-why
+    file: kernel/01-why.md
+    version: "0.1.0"
+    tier: protected
+    role: "Rationale, capture window, falsification conditions, what this is NOT."
+    asserts: [I-5]   # founder-removability stated as success test in §4
+    depends_on: [00-meta]
+
+  - id: 02-anatomy
+    file: kernel/02-anatomy.md
+    version: "0.1.0"
+    tier: protected
+    role: "Four-layer constitutional substrate; Trinity (Sidecar/Magistrate/Sovereign); Sub-Constitution Superset Rule."
+    asserts: [I-1, I-2]
+    depends_on: [00-meta, glossary]
+
+  - id: 03-constellation
+    file: kernel/03-constellation.md
+    version: "0.2.0"
+    tier: protected
+    role: "Federation topology; Sovereign Console; Lesson Ledger; Decentralization Path; forking protocol."
+    asserts: [I-4, I-6]
+    depends_on: [00-meta, 02-anatomy]
+
+  - id: 04-living
+    file: kernel/04-living.md
+    version: "0.2.0"
+    tier: protected
+    role: "Versioning everywhere; tier system applied; evolution mechanism; build-phase vs steady-state cadence; frozen-vs-living argument."
+    asserts: [I-7]
+    depends_on: [00-meta, 02-anatomy]
+
+  - id: 05-evidence
+    file: kernel/05-evidence.md
+    version: "0.1.0"
+    tier: protected
+    role: "Per-instance evidence; cross-instance patterns; limitations; falsification thresholds."
+    asserts: []   # describes empirical state, asserts no new invariants
+    depends_on: [01-why, 02-anatomy, 03-constellation]
+
+  - id: 06-mind
+    file: kernel/06-mind.md
+    version: "0.1.0"
+    tier: protected
+    sub_tier: appendix   # reference runtime, not protocol-tier requirement
+    role: "Reference runtime: LLM Orchestrator + Dictionary VM + Binary Executor; multi-LLM heterogeneity required by I-2."
+    asserts: [I-2]
+    depends_on: [02-anatomy]
+
+  - id: 07-economy
+    file: kernel/07-economy.md
+    version: "0.1.0"
+    tier: protected
+    role: "Token rationale; what the token must NOT do; slashing as constitutional enforcement; Next-Gen Company Hypothesis."
+    asserts: [I-3, I-6]
+    depends_on: [02-anatomy, 03-constellation]
+
+  - id: 08-shadow
+    file: kernel/08-shadow.md
+    version: "0.1.0"
+    tier: protected
+    role: "Named failure modes (7); watch signals; counter-provisions."
+    asserts: []   # observes risks, asserts no new invariants
+    depends_on: [00-meta, 03-constellation, 05-evidence]
+
+  - id: 09-engage
+    file: kernel/09-engage.md
+    version: "0.1.0"
+    tier: protected
+    role: "Audience reading paths (operators, users, researchers, critics); fork-divergence as honest critique."
+    asserts: []
+    depends_on: [00-meta, 03-constellation]
+
+  - id: 10-tasks
+    file: kernel/10-tasks.md
+    version: "0.1.0"
+    tier: protected
+    role: "Task layer: structural identity between transient task units and persistent constitutional content. Universal schema, lifecycle, capability class taxonomy, outcome → lesson loop, evidence requirement."
+    asserts: [I-1, I-7]   # I-1 (reasoning trail = evidence requirement), I-7 (settled tasks are append-only)
+    depends_on: [00-meta, 02-anatomy, 04-living, 08-shadow]
+
+  - id: glossary
+    file: kernel/glossary.md
+    version: "0.6.0"
+    tier: protected
+    role: "Terms layer of the kernel itself."
+    asserts: []
+    depends_on: []
+
+  - id: CHANGELOG
+    file: kernel/CHANGELOG.md
+    version: "0.1.0"
+    tier: protected
+    role: "Append-only modification log; meta-rules in action; defended by I-7."
+    asserts: [I-7]
+    depends_on: [00-meta, 04-living]
+
+  - id: README
+    file: kernel/README.md
+    version: "0.1.0"
+    tier: protected
+    role: "1-page navigable index; honest pre-success header."
+    asserts: []
+    depends_on: [00-meta]
+
+  - id: STATUS
+    file: kernel/STATUS.md
+    version: "0.1.0"
+    tier: protected
+    role: "Live status board: mission, success test, decentralization path, operational snapshot, active risks. Human-readable check-in companion to this manifest."
+    asserts: []
+    depends_on: [01-why, 03-constellation, 05-evidence, 08-shadow, manifest]
+
+  - id: OUTLINE
+    file: kernel/OUTLINE.md
+    version: "0.1.0"
+    tier: meta
+    role: "Drafting outline; locked terminology; open questions."
+    asserts: []
+    depends_on: []
+
+# ---------------------------------------------------------------------------
+# specs: implementation specifications. Sibling to kernel/, not subordinate.
+# Specs implement what kernel asserts. See specs/README.md.
+# ---------------------------------------------------------------------------
+specs:
+  - id: NODE_SPEC
+    file: specs/NODE_SPEC.md
+    version: "1.0.0"
+    role: "Validator-node implementation: Magistrate panel internals, slashing schedule, panel-size rules."
+    implements: [I-1, I-2, I-3]
+    snapshot_origin: pre-kernel  # imported, see specs/README.md §Pre-Kernel Status
+
+  - id: ARCHITECTURE
+    file: specs/ARCHITECTURE.md
+    role: "System architecture spec — predates kernel."
+    snapshot_origin: pre-kernel
+
+  - id: CONTRACT_SPEC
+    file: specs/CONTRACT_SPEC.md
+    version: "2.0"
+    role: "Smart contracts spec — predates kernel."
+    snapshot_origin: pre-kernel
+
+  - id: LLM_PANEL_PROTOCOL
+    file: specs/LLM_PANEL_PROTOCOL.md
+    version: "0.1.0"
+    role: "Build-phase operationalization of Magistrate Pattern via LLM CLIs (Claude + Codex + ...). Tier-sized panels, blind evaluation."
+    implements: [I-1, I-2, I-3]
+    depends_on_kernel: [02-anatomy, 04-living, 06-mind]
+    notes: "Satisfies I-2 for build phase. Does NOT satisfy Decentralization Path criterion 2 (governance-stake separation). Per panels/0001-build-skeleton/merge.md, this 'satisfies I-2' framing is flagged for v0.2.0 amendment as build-phase carve-out, not satisfaction."
+
+  - id: FORK_PROTOCOL
+    file: specs/FORK_PROTOCOL.md
+    version: "0.1.0"
+    role: "Vendored fork specification: file boundary categories (kernel-owned/instance-owned/hybrid), fork-manifest schema, init/pull/conformance procedures. Operationalizes 03-constellation.md §6."
+    implements: [I-1, I-4, I-7]
+    depends_on_kernel: [00-meta, 03-constellation, 04-living]
+    notes: "Build-phase carve-out: founder-only authorship for v0.1.0. v0.2.0 promotion gated on three test forks (FORK_PROTOCOL §9) plus panel review."
+
+  - id: README
+    file: specs/README.md
+    role: "Specs orientation: pre-kernel status, build-phase vs steady-state cadence, conformance check command."
+
+# ---------------------------------------------------------------------------
+# tools: enforcement code. The kernel becomes testable through these.
+# ---------------------------------------------------------------------------
+tools:
+  - id: conformance
+    file: tools/conformance.py
+    version: "0.3.0"
+    role: "Regex evidence/violation check for the 7 invariants, plus manifest drift, plus fork conformance (--fork mode), plus CLARIFY debt scan (--clarify-debt). Tier-aware: kernel must affirm AND not violate; specs must not violate, must affirm I-1/I-2/I-3."
+    enforces: [I-1, I-2, I-3, I-4, I-5, I-6, I-7]
+
+  - id: pre-commit
+    file: tools/pre-commit.sh
+    role: "Per-commit hook. Runs conformance.py --all when kernel/ or specs/ files staged. Build-phase cadence enforcement."
+
+  - id: fork-init
+    file: tools/fork-init.sh
+    version: "0.1.0"
+    role: "Initialize a vendored fork from this kernel. Copies kernel-owned, creates instance-owned skeleton, generates .fork-manifest.yaml. FORK_PROTOCOL §6."
+    enforces_via: [FORK_PROTOCOL]
+
+  - id: fork-pull
+    file: tools/fork-pull.sh
+    version: "0.1.0"
+    role: "Pull upstream kernel changes into a vendored fork. Hash check, 3-way merge for hybrid files, manifest update. FORK_PROTOCOL §7."
+    enforces_via: [FORK_PROTOCOL]
+    enforces_via: [conformance]
+
+# ---------------------------------------------------------------------------
+# templates: scaffolds that any kernel-touching amendment or instance lesson
+# must use. Kernel-owned (forks inherit). Listed here so manifest drift is
+# observable when a template is touched. See specs/research/spec-kit-inspiration.md
+# §5.1 for the borrowed-pattern rationale.
+# ---------------------------------------------------------------------------
+templates:
+  - id: amendment-plan
+    file: templates/amendment-plan-template.md
+    version: "0.1.0"
+    tier: protected
+    role: "Structural scaffold for any amendment that touches kernel-owned files. Mandatory ## §3 Invariant Impact Check enumerates I-1..I-7 with unchanged|strengthened|weakened annotation; weakening any invariant is a divergent-fork act per 00-meta.md §4.5."
+    depends_on_kernel: [00-meta, 04-living, glossary]
+    referenced_by: [LLM_PANEL_PROTOCOL]
+
+  - id: lesson
+    file: templates/lesson-template.md
+    version: "0.1.0"
+    tier: protected
+    role: "Structural scaffold for an instance to record a kernel-relevant pattern observed in operation. Upstream artifact of the lesson → propagate workflow chain. ## §5 Kernel-relevance check determines whether the lesson promotes to an amendment plan."
+    depends_on_kernel: [04-living, glossary]
+    referenced_by: [amendment-plan]
+
+# ---------------------------------------------------------------------------
+# invariants: the 7 immutable constants. Where asserted, where enforced.
+# ---------------------------------------------------------------------------
+invariants:
+  I-1:
+    name: "Reasoning trail required"
+    introduced: "0.1.0"
+    asserted_in: [00-meta §7, 02-anatomy §6, 06-mind §3, 10-tasks §6]
+    enforced_by: [conformance, NODE_SPEC, LLM_PANEL_PROTOCOL]
+
+  I-2:
+    name: "Heterogeneous evaluation"
+    introduced: "0.1.0"
+    asserted_in: [00-meta §4.3, 00-meta §7, 02-anatomy §6.2, 06-mind §4.4]
+    enforced_by: [conformance, NODE_SPEC §6, LLM_PANEL_PROTOCOL §2]
+    notes: "Build phase: LLM_PANEL_PROTOCOL provides heterogeneity via distinct CLIs. Does NOT satisfy Sybil-resistance (separate concern)."
+
+  I-3:
+    name: "Dissent is protected"
+    introduced: "0.1.0"
+    asserted_in: [00-meta §7, 02-anatomy §6.2, 07-economy §3]
+    enforced_by: [conformance, NODE_SPEC §10, LLM_PANEL_PROTOCOL §3]
+
+  I-4:
+    name: "Fork freedom"
+    introduced: "0.1.0"
+    asserted_in: [00-meta §4.5, 00-meta §7, 03-constellation §6, 09-engage]
+    enforced_by: [conformance]
+    notes: "MIT-licensed; cannot be tightened retroactively."
+
+  I-5:
+    name: "Founder removability"
+    introduced: "0.1.0"
+    asserted_in: [00-meta §7, 01-why §4, 03-constellation §5]
+    enforced_by: [conformance]
+    success_test: "Founder Independence Criterion (01-why §4) — currently 0/4 met."
+
+  I-6:
+    name: "Instance data sovereignty"
+    introduced: "0.1.0"
+    asserted_in: [00-meta §7, 03-constellation §3, 07-economy §2.2]
+    enforced_by: [conformance]
+
+  I-7:
+    name: "No retroactive amendment"
+    introduced: "0.1.0"
+    asserted_in: [00-meta §7, 04-living §5, 10-tasks §3, CHANGELOG]
+    enforced_by: [conformance, pre-commit, CHANGELOG (append-only)]
+
+# ---------------------------------------------------------------------------
+# terms: structurally load-bearing terms only. Definitions live in glossary.md.
+# Stored here ONLY for graph queries: depends_on (other terms it cites) and
+# appears_in (parts that reference it). When a term is added to glossary.md
+# AND used in 2+ parts, it should appear here.
+# ---------------------------------------------------------------------------
+terms:
+  trinity:
+    appears_in: [02-anatomy §6, 06-mind, glossary]
+    depends_on: [sidecar, magistrate, sovereign]
+
+  sidecar:
+    appears_in: [02-anatomy §6.1, 06-mind, glossary]
+    depends_on: []
+
+  magistrate:
+    appears_in: [02-anatomy §6.2, 06-mind, 07-economy §3, glossary]
+    depends_on: [magistrate-pattern]
+
+  magistrate-pattern:
+    appears_in: [02-anatomy §6.2, 07-economy §3, NODE_SPEC, LLM_PANEL_PROTOCOL, glossary]
+    depends_on: [magistrate]
+    enforces: [I-2, I-3]
+
+  sovereign:
+    appears_in: [02-anatomy §6.3, 03-constellation, glossary]
+    depends_on: []
+
+  sovereign-console:
+    appears_in: [03-constellation §3, 03-constellation §3.5, glossary]
+    depends_on: [sovereign, instance]
+
+  instance:
+    appears_in: [02-anatomy §1, 03-constellation §2, 05-evidence, glossary]
+    depends_on: [kernel]
+
+  kernel:
+    appears_in: [00-meta §1, OUTLINE, glossary]
+    depends_on: []
+
+  constellation:
+    appears_in: [03-constellation §1, glossary]
+    depends_on: [kernel, instance]
+
+  term:
+    appears_in: [02-anatomy §2.1, glossary]
+    depends_on: []
+
+  principle:
+    appears_in: [02-anatomy §2.2, glossary]
+    depends_on: [term]
+
+  rule:
+    appears_in: [02-anatomy §2.3, glossary]
+    depends_on: [principle]
+
+  meta-rule:
+    appears_in: [02-anatomy §2.4, 00-meta, glossary]
+    depends_on: [rule]
+
+  tier-system:
+    appears_in: [00-meta §2, 04-living §3, glossary]
+    depends_on: []
+
+  amendment-procedure:
+    appears_in: [00-meta §4, 04-living §4, glossary]
+    depends_on: [tier-system]
+
+  decay-mechanism:
+    appears_in: [04-living §6.2, glossary]
+    depends_on: [amendment-procedure]
+
+  build-phase:
+    appears_in: [04-living §6.1, specs/README, glossary]
+    depends_on: [decentralization-path]
+
+  steady-state:
+    appears_in: [04-living §6.2, glossary]
+    depends_on: [decentralization-path]
+
+  decentralization-path:
+    appears_in: [03-constellation §5, 01-why §4, glossary]
+    depends_on: [founder-independence-criterion]
+
+  founder-independence-criterion:
+    appears_in: [01-why §4, 05-evidence §8, glossary]
+    depends_on: []
+    enforces: [I-5]
+
+  immutable-invariant:
+    appears_in: [00-meta §7, 04-living, glossary]
+    depends_on: [tier-system]
+
+  conformant-fork:
+    appears_in: [03-constellation §6, glossary]
+    depends_on: [immutable-invariant]
+
+  divergent-fork:
+    appears_in: [00-meta §4.5, 03-constellation §6, glossary]
+    depends_on: [immutable-invariant]
+
+  pos:
+    appears_in: [01-why §3, 02-anatomy §2, glossary]
+    depends_on: []
+    notes: "POS↔Constitution structural identity claim — central empirical bet."
+
+  conformance-harness:
+    appears_in: [tools/conformance.py, specs/README, glossary]
+    depends_on: [immutable-invariant, tier-system]
+
+  llm-panel-protocol:
+    appears_in: [LLM_PANEL_PROTOCOL, glossary]
+    depends_on: [magistrate-pattern, build-phase]
+
+  blind-evaluation:
+    appears_in: [LLM_PANEL_PROTOCOL §3, glossary]
+    depends_on: [llm-panel-protocol]
+
+  panel-tier-sizing:
+    appears_in: [LLM_PANEL_PROTOCOL §2, glossary]
+    depends_on: [tier-system, llm-panel-protocol]
+
+  reasoning-artifact:
+    appears_in: [00-meta §7, 02-anatomy §6, 10-tasks §6, glossary]
+    depends_on: []
+    enforces: [I-1]
+
+  task-layer:
+    appears_in: [10-tasks §1, 10-tasks §7, glossary]
+    depends_on: [term, principle, rule, meta-rule]
+    notes: "Task = constitutional element with transient lifecycle. Structural identity claim (10-tasks §1) parallels POS↔Constitution claim (01-why §3)."
+
+  capability-class:
+    appears_in: [10-tasks §4, glossary]
+    depends_on: [task-layer]
+    notes: "Eight-class action taxonomy from Security Leviathan, generalized: observation_only..authority_effect."
+
+  outcome-lesson-loop:
+    appears_in: [10-tasks §5, 04-living §5, glossary]
+    depends_on: [task-layer, amendment-procedure]
+    notes: "Runtime engine of constitutional evolution. N settled outcomes → lesson candidate → amendment proposal."
+
+  evidence-requirement:
+    appears_in: [10-tasks §6, 02-anatomy §6, glossary]
+    depends_on: [reasoning-artifact, task-layer]
+    enforces: [I-1]
+    notes: "Liveprob D.1.6 (runner.py _audit_decision_evidence, 2026-05-04) is the reference enforcement implementation."
+
+# ---------------------------------------------------------------------------
+# Closing notes
+# ---------------------------------------------------------------------------
+# This manifest is read-able by tools/conformance.py for future drift checks
+# (e.g., a part header lists v0.2.0 but manifest says v0.1.0 — drift). That
+# integration is not yet wired in v0.1.0 of conformance.py; it is the next
+# small-scoped extension.
+#
+# Adding a new part: append to `parts:`. Adding a new spec: append to
+# `specs:`. Adding a new term used in ≥2 parts: append to `terms:` AND
+# update glossary.md. Adding an invariant: requires panel review per
+# 00-meta §7.
+#
+# Removing a term from `terms:` requires verifying it is referenced in <2
+# parts. Removing a part requires CHANGELOG entry and amendment procedure.
+#
+# This file is the kernel's structural skeleton. If it disagrees with the
+# part files themselves, the part files are authoritative; this manifest is
+# revised. The asymmetry is intentional: prose carries the meaning, this
+# carries the structure.

@@ -1,0 +1,23 @@
+{
+  "name": "leviathan-federation-acp",
+  "version": "0.1.0",
+  "description": "Federation Minimal Agent Communication Protocol — local-isolated agent CLI dependencies (federation-canonical, P-1 sovereignty preserving)",
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "@agentclientprotocol/claude-agent-acp": "^0.33.1",
+    "@zed-industries/codex-acp": "^0.14.0"
+  },
+  "scripts": {
+    "test:claude": "claude-agent-acp --version",
+    "test:codex": "codex-acp --version"
+  },
+  "comments": {
+    "isolation": "Local node_modules pattern (no global install). Equivalent to Python uv venv — federation tooling sovereignty preserved.",
+    "binaries": {
+      "claude-agent-acp": "Anthropic Claude Code via ACP protocol (Apache-2.0)",
+      "codex-acp": "OpenAI Codex via ACP protocol (Apache-2.0)"
+    },
+    "usage": "From parent dir: ACPClient(command='./node_modules/.bin/claude-agent-acp')"
+  }
+}

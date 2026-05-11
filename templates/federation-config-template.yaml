@@ -1,0 +1,150 @@
+# .federation — Instance-side Federation Config
+#
+# Each federation member instance keeps a copy of this file at the root
+# of its own repo (NOT in leviathan-meta — this is local to each instance).
+#
+# Recommended location: <instance-repo>/.federation
+# Recommended commit policy: COMMIT this file (it documents your membership)
+#
+# This file declares: "I am a federation member. Here's my identity, here's
+# how I sync with the federation, here's what I publish."
+
+# ============================================================================
+# Federation Membership Declaration
+# ============================================================================
+
+federation:
+  # The shared meta-repo URL (federation root)
+  meta_repo_url: "https://github.com/aigentone/leviathan-meta"
+
+  # Local path where the meta-repo is cloned on this machine
+  # Each machine sets this to wherever it cloned leviathan-meta
+  meta_repo_local: "~/path/to/leviathan-meta"
+
+  # Which subdirectory in the meta-repo this instance owns
+  # (must match an entry in leviathan-meta/README.md Subdirectory Ownership table)
+  instance_id: "your-instance-name"
+
+  # Federation rules version this instance has acknowledged
+  # Update when federation/manifest.yaml version bumps and you've reviewed
+  acknowledged_federation_version: "0.1.0"
+
+# ============================================================================
+# Sync Configuration
+# ============================================================================
+
+sync:
+  # Sync mode:
+  #   manual    — operator runs git pull/push by hand (default for new members)
+  #   hook      — pre/post-commit hooks auto-sync (Level 2 federation)
+  #   cron      — scheduled job auto-pulls + auto-pushes (Level 2)
+  #   real-time — file watcher + immediate push (Level 3, advanced)
+  mode: "manual"
+
+  # Last successful sync (auto-updated by sync helpers)
+  last_pull: null
+  last_push: null
+
+  # Pre-push checks
+  checks_before_push:
+    - "secret_scan"       # gitleaks or equivalent
+    - "manifest_validate" # ensure manifest.yaml has all required fields
+    - "snapshot_match"    # verify snapshot_hash matches local computation
+
+  # What to do if check fails
+  on_check_fail: "abort"  # abort | warn | skip
+
+# ============================================================================
+# What This Instance Publishes
+# ============================================================================
+
+publish:
+  # Status file (always required per federation/rules.md R-2)
+  status_file: "status.md"
+
+  # Manifest file (always required)
+  manifest_file: "manifest.yaml"      # or manifest-public.yaml if applying privacy filter
+
+  # Auto-update triggers
+  auto_update_on:
+    - "snapshot_hash_change"   # when constitution evolves
+    - "version_bump"           # when active version changes
+    - "milestone"              # when significant work completes (manual flag)
+
+  # Update frequency override (when auto-update conditions don't fire)
+  minimum_update_interval_days: 90  # at least once per quarter (federation/rules.md R-3)
+
+# ============================================================================
+# What This Instance Subscribes To
+# ============================================================================
+
+subscribe:
+  # Which directories in meta-repo this instance cares about
+  # When these change, instance gets notified (Level 2+ feature)
+  watch_paths:
+    - "kernel/"               # always — kernel evolution affects everyone
+    - "federation/"           # always — federation rule changes
+    - "contracts/"            # if instance uses master contracts
+    - "briefings/"            # always — inter-agent briefings
+
+  # Topic subscriptions (used by federation-search & discovery)
+  # Add topics this instance owns / has expertise in / cares about
+  topics:
+    - "your-domain"           # e.g., "trade", "security", "personal"
+    - "your-key-pattern"      # e.g., "evidence-enforcement", "8-class-capability"
+
+# ============================================================================
+# Discovery Behavior
+# ============================================================================
+
+discovery:
+  # Run federation-search before starting major new work
+  # (catches duplicate work / surfaces existing artifacts)
+  pre_task_search: true
+
+  # Topics to auto-search when starting new work
+  # (extends DISCOVERY_EXPANSIONS in federation-search.py)
+  auto_search_topics:
+    - "constitution"
+    - "amendment"
+    - "snapshot"
+
+# ============================================================================
+# Privacy & Compliance
+# ============================================================================
+
+privacy:
+  # Apply public-safe filter before publishing manifest
+  use_public_filter: true
+
+  # Files in this instance that should NEVER be synced to meta-repo
+  # (covers .gitignore but federation-side too)
+  never_publish:
+    - "secrets/"
+    - "wallets/"
+    - "raw-decisions/"
+    - "*-private.md"
+
+  # Confirm before any push operation
+  confirm_push: true
+
+# ============================================================================
+# Notes
+# ============================================================================
+
+notes: |
+  This config file is part of the federation membership declaration. It is
+  read by:
+    - tools/report-status.py (publishes this instance to meta-repo)
+    - tools/read-member.py (queries other members from meta-repo)
+    - tools/federation-search.py (uses topics + auto_search_topics)
+    - Any instance-side automation hooks
+
+  By committing this file with these settings, the instance acknowledges:
+    - federation/principles.md (10 federation principles)
+    - federation/rules.md (17 coordination rules — especially R-1, R-2)
+    - federation/meta-rules.md (amendment procedure)
+
+  When federation principles or rules version-bump, you should review
+  acknowledged_federation_version above and update if you accept the
+  new version's terms.

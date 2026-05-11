@@ -1,0 +1,77 @@
+# Instance Manifest Template
+# Copy to <instance>/manifest.yaml and fill in.
+# This is a public-safe manifest for the meta-repo. The instance's full
+# constitution manifest may have additional fields; this captures only what
+# other instances need to see.
+
+instance:
+  name: "instance-name"           # e.g., "liveprob"
+  domain: "domain-tag"            # e.g., "trade", "security", "personal"
+  owner_machine: "hostname"       # which machine owns this manifest
+  created: "YYYY-MM-DD"
+  last_updated: "YYYY-MM-DD"
+
+# Kernel inheritance (kernel/03-constellation.md §6 forking protocol)
+inheritance:
+  forked_from: "leviathan-kernel@v0.1.0"
+  inherits_from: null              # set to "master-leviathan@v0.1" when ready
+  re_anchor_seam: true              # discipline: keep null inherits_from visible
+
+# Constitution snapshot (operational anchor)
+constitution:
+  snapshot_hash: "sha256:____"     # full hash of instance's constitution YAML
+  active_version: "v0.1.0"
+  element_counts:
+    immutable: 0
+    protected: 0
+    mutable: 0
+  total_elements: 0
+  last_constitutional_change: "YYYY-MM-DD"
+
+# Tier classification declaration
+tiers_present:
+  - immutable
+  - protected
+  - mutable
+
+# Capability classes this instance handles (kernel/10-tasks.md §4)
+capability_classes:
+  - observation_only
+  - advisory_proposal
+  # - bounded_validation
+  # - executable_normalized
+  # - sensitive_active
+  # - annex_special_mode
+  # - policy_write
+  # - authority_effect
+
+# Maturity gates active
+maturity_gates:
+  - "principle_paper_only_until_13a"  # example from Liveprob
+  # other instance-specific gates
+
+# Decentralization criteria (kernel/03-constellation.md §5)
+decentralization_path:
+  criterion_1_first_fork: false
+  criterion_2_three_validators: false
+  criterion_3_seven_subnet: false
+  criterion_4_amendment_accepted: false
+  criterion_5_lesson_ledger_traffic: false
+
+# What this instance needs from federation
+dependencies:
+  needs:
+    - "master-leviathan formalization (for re-anchor)"
+    - "on-chain bridge contracts (for receipt layer)"
+  provides:
+    - "reference implementation of [pattern]"
+
+# Falsification conditions (kernel I-3)
+falsification:
+  # Each entry: claim → refuted_if
+  - claim: "Example claim this instance makes"
+    refuted_if: "Observable that would refute the claim"
+
+# Notes
+notes: |
+  Optional free-form notes for federation context.
