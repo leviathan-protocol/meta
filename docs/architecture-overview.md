@@ -140,14 +140,15 @@ leviathan-protocol/<domain>/
 ├── README.md                       — Sub-Leviathan's purpose, scope, status
 ├── manifest.yaml                   — Federation membership declaration + L3 implementation list
 ├── LICENSE
-└── constitution/                   — Markdown + YAML frontmatter elements
-    ├── 00-immutable-core/          — IMMUTABLE: fork-only-changeable foundational guarantees
-    ├── 10-protocol-mutable/        — LOCKED: high-bar governance vote (typically 95% threshold)
-    ├── 20-mutable-rules/           — MUTABLE: regular governance vote
-    └── 30-shared-terms/            — MUTABLE: terminology shared across all implementations
+└── constitution/                   — Markdown + YAML frontmatter elements (restructured 2026-05-14)
+    ├── terms/                      — @TERM:       definitional vocabulary
+    ├── principles/                 — #PRINCIPLE:  guiding values (any mutability)
+    ├── rules/                      — !RULE:       operational + metarules (any mutability)
+    ├── shadows/                    — 🜏SHADOW:    anti-patterns (future)
+    └── protocols/                  — ⚙PROTOCOL:   situational behavior sets (future)
 ```
 
-Each `.md` element file has YAML frontmatter (`slug`, `element_type`, `mutability`, `current_version`, `contentURI`) and a body separated by `<hr>` (above on-chain content, below editorial context).
+Element type at folder level; mutability tier (IMMUTABLE / LOCKED / MUTABLE) declared in YAML frontmatter. Each `.md` element file has frontmatter (`slug`, `element_type`, `mutability`, `current_version`, `contentURI`) and a body separated by `<hr>` (above on-chain content, below editorial context).
 
 **Inheritance:** Each Sub-Leviathan inherits from the Federation Kernel (kernel IMMUTABLE invariants must be satisfied — including §6 Witness Principle, added 2026-05-12). Domain-specific elements layer on top.
 
@@ -343,20 +344,19 @@ L1 (Federation Leviathan):
 L2 (Sub-Leviathan):
   leviathan-protocol/companion/    ← canonical Personal Governance constitution
   ├── constitution/
-  │   ├── 00-immutable-core/
-  │   │   ├── 1-identity-sovereignty.md
-  │   │   ├── 2-data-on-device.md
-  │   │   └── 3-witness-mandate.md              ← two-constitution model REQUIRED
-  │   ├── 10-protocol-mutable/
-  │   │   ├── transparent-mediation.md
-  │   │   ├── revocation-right.md
-  │   │   └── witness-locked-framework.md       ← 6 locked rules every Witness inherits
-  │   ├── 20-mutable-rules/
-  │   │   ├── advisory-validator-eligibility.md
-  │   │   └── witness-default-seed.md           ← Witness v1.0 first-run defaults
-  │   └── 30-shared-terms/
-  │       ├── persona.md
-  │       └── belief.md
+  │   ├── terms/
+  │   │   ├── persona.md                          (MUTABLE)
+  │   │   └── belief.md                           (MUTABLE)
+  │   ├── principles/
+  │   │   ├── identity-sovereignty.md             (IMMUTABLE)
+  │   │   ├── data-on-device.md                   (IMMUTABLE)
+  │   │   ├── witness-mandate.md                  (IMMUTABLE — two-constitution model REQUIRED)
+  │   │   ├── transparent-mediation.md            (LOCKED)
+  │   │   └── revocation-right.md                 (LOCKED)
+  │   └── rules/
+  │       ├── witness-locked-framework.md         (LOCKED — 6 locked rules every Witness inherits)
+  │       ├── advisory-validator-eligibility.md   (MUTABLE)
+  │       └── witness-default-seed.md             (MUTABLE — Witness v1.0 first-run defaults)
   └── manifest.yaml — inherits from kernel + federation
 
 L3 (Multiple Sub-Project implementations binding to Companion):

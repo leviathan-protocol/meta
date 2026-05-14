@@ -19,25 +19,21 @@ This spec defines the file format for constitutional elements (principles, rules
 
 ## File structure
 
+Element type encoded at folder level. Mutability tier (IMMUTABLE / LOCKED / MUTABLE) declared in frontmatter (authoritative source). Restructured 2026-05-14 to align with founder's POS pattern; all federation repos follow this layout.
+
 ```
-leviathan-protocol/meta/constitution/
-  ├── 00-immutable-core/         # mutability: IMMUTABLE
-  │   ├── 1-user-sovereignty.md
-  │   ├── 2-fork-freedom.md
-  │   └── ...
-  ├── 10-protocol-mutable/        # mutability: LOCKED
-  │   ├── citizenship.md
-  │   └── ...
-  ├── 20-domains/                 # per-domain
-  │   └── animal-welfare/
-  │       ├── principles/
-  │       ├── terms/
-  │       └── rules/
-  ├── 30-shared-terms/            # mutability: MUTABLE
+leviathan-protocol/<repo>/constitution/
+  ├── terms/           # @TERM       definitional vocabulary
+  ├── principles/      # #PRINCIPLE  guiding values (any mutability)
+  ├── rules/           # !RULE       operational + metarules (any mutability)
+  ├── shadows/         # 🜏SHADOW    anti-patterns (future)
+  ├── protocols/       # ⚙PROTOCOL   situational behavior sets (future)
   └── README.md
 ```
 
-One file per element. Filename = element slug (kebab-case) with leading number for sort order in immutable_core.
+One file per element. Filename = element slug (kebab-case). No numeric prefix required (sort order is alphabetical or by frontmatter `current_version` if needed).
+
+Domain repos (e.g., `leviathan-protocol/animal-welfare`) use the same folder structure. Each repo's manifest declares `inherits_from: leviathan-kernel@v0.1` so the federation kernel IMMUTABLES inherit transitively.
 
 ---
 
@@ -99,7 +95,7 @@ Two zones separated by horizontal rule:
 
 ---
 
-## Seed example: `00-immutable-core/1-user-sovereignty.md`
+## Seed example: `principles/user-sovereignty.md`
 
 ```markdown
 ---

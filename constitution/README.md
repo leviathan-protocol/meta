@@ -10,12 +10,15 @@ This folder is the **human-editable surface** for Leviathan's on-chain constitut
 
 ## Structure
 
+Element type at folder level. Mutability tier (IMMUTABLE / LOCKED / MUTABLE) in YAML frontmatter of each file. Restructured 2026-05-14 to align with the founder's POS pattern; all 4 federation repos use this layout.
+
 ```
 constitution/
-  ├── 00-immutable-core/   ← Soulbound. Changeable only by fork.
-  ├── 10-protocol-mutable/ ← LOCKED. High-bar governance vote required.
-  ├── 20-domains/          ← Per-domain specialized Leviathans (Animal Welfare, Music, Security, ...)
-  ├── 30-shared-terms/     ← MUTABLE. Terminology shared across domains.
+  ├── terms/         ← @TERM       definitional vocabulary
+  ├── principles/    ← #PRINCIPLE  guiding values
+  ├── rules/         ← !RULE       operational + metarules
+  ├── shadows/       ← 🜏SHADOW    anti-patterns (future)
+  ├── protocols/     ← ⚙PROTOCOL   situational behavior sets (future)
   └── README.md
 ```
 
@@ -25,7 +28,7 @@ Each constitutional element is a single `.md` file with:
   - **Constitutional content** (above the `<hr>`) — goes on-chain
   - **Editorial content** (below the `<hr>`) — for human readers, not stored on-chain
 
-See [`element-format.md`](https://github.com/leviathan-protocol/meta/blob/main/docs/element-format.md) for full spec, including the seed example (`1-user-sovereignty.md`).
+See [`../docs/element-format.md`](../docs/element-format.md) for full spec, including the seed example.
 
 ---
 
