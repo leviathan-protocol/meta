@@ -1,8 +1,8 @@
 # Constitution — Editing Surface for the On-Chain Registry
 
 > **Status:** draft  ·  **Phase:** 0 (in progress as of 2026-05-11)
-> **Format spec:** [leviathan-protocol/public/specs/element-format.md](https://github.com/leviathan-protocol/public/blob/main/specs/element-format.md)
-> **On-chain target:** `ConstitutionalRegistry.sol` deployed on Leviathan L1 (per [ADR-008](https://github.com/leviathan-protocol/public/blob/main/decisions/008-constitution-storage.md))
+> **Format spec:** [leviathan-protocol/meta/specs/element-format.md](https://github.com/leviathan-protocol/meta/blob/main/docs/element-format.md)
+> **On-chain target:** `ConstitutionalRegistry.sol` deployed on Leviathan L1 (per [ADR-008](https://github.com/leviathan-protocol/meta/blob/main/decisions/008-constitution-storage.md))
 
 This folder is the **human-editable surface** for Leviathan's on-chain constitution. The canonical state lives on-chain in the `ConstitutionalRegistry` contract; this folder is where amendments are drafted, reviewed, and prepared for ratification.
 
@@ -25,7 +25,7 @@ Each constitutional element is a single `.md` file with:
   - **Constitutional content** (above the `<hr>`) — goes on-chain
   - **Editorial content** (below the `<hr>`) — for human readers, not stored on-chain
 
-See [`element-format.md`](https://github.com/leviathan-protocol/public/blob/main/specs/element-format.md) for full spec, including the seed example (`1-user-sovereignty.md`).
+See [`element-format.md`](https://github.com/leviathan-protocol/meta/blob/main/docs/element-format.md) for full spec, including the seed example (`1-user-sovereignty.md`).
 
 ---
 

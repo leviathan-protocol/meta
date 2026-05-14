@@ -2,7 +2,7 @@
 
 All material changes to `leviathan-protocol/meta` are recorded here.
 
-Format: append-only, new entries at top, date-stamped, cross-linked to ADRs in `leviathan-protocol/public/decisions/`.
+Format: append-only, new entries at top, date-stamped, cross-linked to ADRs in `leviathan-protocol/meta/decisions/`.
 
 ---
 
@@ -30,7 +30,7 @@ This repository was previously maintained under a personal GitHub account as par
 
 Pre-public manifests for instances (Companion, Anima, Tribün, Security, Animal-Welfare, and others) contained operational details (machine paths, trading strategies, internal coordination, founder personal context) inappropriate for public consumption. These manifests will be re-authored in TIER 1 federation-appropriate form and added back as instances become public-ready. The internal/private instances (Atlas, Tasma, Liveprob, Fast) remain in private federation tracking and are not part of the public federation.
 
-**Decisions at genesis** (see `leviathan-protocol/public/decisions/`):
+**Decisions at genesis** (see `leviathan-protocol/meta/decisions/`):
 
 - ADR-001 — Deployment target: own Avalanche L1 (Fuji testnet first, mainnet when migration triggers met)
 - ADR-005 — Agent orchestration via ACP (Agent Client Protocol)

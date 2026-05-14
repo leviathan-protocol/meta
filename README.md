@@ -78,7 +78,7 @@ Per [`constitution/README.md`](./constitution/README.md), constitutional element
 
 The repo is the **editing surface**; the chain is the **canonical record**. This separation allows large editorial content and version history to live in chain while the repo stays a readable editing experience.
 
-See [`specs/element-format.md`](https://github.com/leviathan-protocol/public/blob/main/specs/element-format.md) (in the public coordination repo) for the file format spec.
+See [`docs/element-format.md`](./docs/element-format.md) for the file format spec, and [`docs/architecture-overview.md`](./docs/architecture-overview.md) for how every layer of the federation relates.
 
 ---
 
@@ -87,7 +87,7 @@ See [`specs/element-format.md`](https://github.com/leviathan-protocol/public/blo
 Leviathan operates on two distinct governance layers:
 
 ### Layer 0 — Implementation (off-chain, RFC-style)
-Changes to the reference implementation repos (this one, `node`, `ui`, `public`, etc.) follow an **RFC-style process** documented in `leviathan-protocol/public` via Architectural Decision Records (ADRs). Founder is the sovereign authority during bootstrap; this may evolve toward a community-elected developer council as the project matures.
+Changes to the reference implementation repos (this one, `node`, `ui`, sub-leviathans, etc.) follow an **RFC-style process** documented in this repo's [`decisions/`](./decisions/) folder via Architectural Decision Records (ADRs). Founder is the sovereign authority during bootstrap; this may evolve toward a community-elected developer council as the project matures.
 
 ### Layer 1 — Protocol (on-chain)
 The Leviathan Protocol itself — once fully deployed — is governed **on-chain** via the `ConstitutionalRegistry` contract, validator network, and forum-based proposals.
@@ -100,7 +100,7 @@ These are deliberately separate to avoid infinite recursion (you cannot govern y
 
 1. **Read the kernel** — `kernel/` describes the abstract substrate every Leviathan instance must satisfy
 2. **Read the federation constitution** — `federation/` describes how this Federation Leviathan governs itself
-3. **Read [`leviathan-protocol/public`](https://github.com/leviathan-protocol/public)** — the coordination repo with current ADRs, phase plans, and active decisions
+3. **Read [`leviathan-protocol/meta`](https://github.com/leviathan-protocol/meta)** — the coordination repo with current ADRs, phase plans, and active decisions
 4. **Propose changes** via PRs to relevant files, following the editorial separator pattern (constitutional content above `<hr>`, editorial below)
 5. **For specialized Leviathans** — propose a new TIER 2 repo via PR to `templates/`
 
@@ -114,7 +114,7 @@ CC BY-SA 4.0 (or compatible). Fork freedom is built into the protocol itself —
 
 ## Related repositories
 
-- [`leviathan-protocol/public`](https://github.com/leviathan-protocol/public) — Cross-repo coordination, ADRs, phase plans, status dashboard
+- [`leviathan-protocol/meta`](https://github.com/leviathan-protocol/meta) — Cross-repo coordination, ADRs, phase plans, status dashboard
 - [`leviathan-protocol/animal-welfare`](https://github.com/leviathan-protocol/animal-welfare) — First specialized Leviathan instance
 - [`leviathan-protocol/node`](https://github.com/leviathan-protocol/node) — Smart contracts + validator daemon *(coming)*
 - [`leviathan-protocol/ui`](https://github.com/leviathan-protocol/ui) — Site + forum *(coming)*
