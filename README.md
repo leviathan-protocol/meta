@@ -60,6 +60,8 @@ The federation currently has these public-facing member instances:
 | **Companion** | Layer 1 — personal POS governance pattern | (private — personal instance) | Operational |
 | **Anima** | Layer 3 — mobile POS, on-device sovereignty | TBD | Active development (Flutter native migration) |
 | **Animal Welfare** | First specialized Leviathan | `leviathan-protocol/animal-welfare` | Genesis (constitution being authored) |
+| **Scream Protocol** | Witness Principle weaponized — sensor → receipts → publish | `leviathan-protocol/scream` | Genesis (constitution drafting) |
+| **Medicine** | AI-augmented care, physician-led | `leviathan-protocol/medicine` | Open seat — seed-draft constitution awaiting first domain-expert author |
 | **Tribün** | Sports/fandom community governance | TBD | Planned |
 | **Security** | Validator federation auditor | TBD | Planned |
 
