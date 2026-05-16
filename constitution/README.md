@@ -43,10 +43,16 @@ The on-chain ratification (via `ConstitutionalRegistry.ratifyNewVersion(...)`) i
 ## Migration status
 
 - **Seed:** `00-immutable-core/1-user-sovereignty.md` (2026-05-11, written as format reference)
+- **Restructure 2026-05-14:** flat element folders (`terms/`, `principles/`, `rules/`, ...) with mutability declared in YAML frontmatter
+- **2026-05-15 — dialectic/evidence/proposal trio ported** from DAHAO test-1 prototype:
+  - `terms/dialectic.md` (LOCKED), `terms/evidence.md` (LOCKED), `terms/proposal.md` (LOCKED)
+  - `rules/dialectic-format.md` (LOCKED), `rules/evidence-required.md` (MUTABLE), `rules/proposal-process.md` (LOCKED)
 - **TODO Phase 0 Step 4:**
   - Migrate `federation/principles.md`, `federation/terms.md`, `federation/rules.md` content into individual element files here
   - Migrate `leviathan_node/leviathan-core.yaml` immutable_core entries into `00-immutable-core/`
   - Migrate `dahao-all/aigentone/dahao-animal-welfare-test-1/data/*.json` into `leviathan-protocol/animal-welfare` repo (separate repo, not this one)
+- **TODO Phase 2 — process layer numbers and ratchet:**
+  - Port `rule_consensus_threshold`, `rule_protection_ratchet`, `rule_quorum_requirement`, `rule_alignment_check`, `rule_reference_validity`, `rule_version_bump` from DAHAO test-1 with Leviathan-vocabulary adaptation (standing-weighted quorum, magistrate panel for alignment check, etc.)
 
 ## Compile pipeline
 
