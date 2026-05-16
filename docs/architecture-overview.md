@@ -39,7 +39,11 @@ If anything in another doc contradicts this overview, **this overview wins** unl
 │      leviathan-protocol/animal-welfare  (deployed 2026-05-12)   │
 │      leviathan-protocol/scream          (deployed 2026-05-13)   │
 │      leviathan-protocol/medicine        (seat opened 2026-05-15) │
-│      leviathan-protocol/security        (planned)               │
+│      leviathan-protocol/cyber-security  (seat opened 2026-05-16; │
+│                                          first instance:          │
+│                                          aigentone/leviathan-     │
+│                                          security, private,       │
+│                                          personal-account demo)   │
 │      leviathan-protocol/tribun-leviathan (planned)              │
 │      Constitution + manifest only (no implementation code)      │
 └─────────────────────────────────────────────────────────────────┘
