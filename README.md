@@ -62,8 +62,8 @@ The federation currently has these public-facing member instances:
 | **Animal Welfare** | First specialized Leviathan | `leviathan-protocol/animal-welfare` | Genesis (constitution being authored) |
 | **Scream Protocol** | Witness Principle weaponized — sensor → receipts → publish | `leviathan-protocol/scream` | Genesis (constitution drafting) |
 | **Medicine** | AI-augmented care, physician-led | `leviathan-protocol/medicine` | Open seat — seed-draft constitution awaiting first domain-expert author |
+| **Cyber Security** | Defensive-only — detection, response, coordinated disclosure, forensic discipline | `leviathan-protocol/cyber-security` | Seed-draft authored 2026-05-16; author seat open. First instance: `aigentone/leviathan-security` (private, personal-account demo of mixed instance pattern) |
 | **Tribün** | Sports/fandom community governance | TBD | Planned |
-| **Security** | Validator federation auditor | TBD | Planned |
 
 Additional internal/operational instances are tracked privately in the founder's federation backup; they may join public federation when their public manifests are ready.
 
