@@ -7,7 +7,7 @@ current_version: 1
 contentURI: null
 ---
 
-A numeric measure of a participant's accumulated constitutional enactment within the Leviathan federation. Every ratified proposal, accepted vote, validator verdict, or other recognized contribution is one enactment event — bringing a piece of constitutional intent into reality. Enactment is non-transferable (not a token, not currency), serves as the basis for advancing standing, and is recorded across all Sub-Leviathans the participant engages with.
+A numeric measure of a participant's accumulated constitutional enactment within the Leviathan federation. Every ratified proposal, accepted vote, witness attestation, or other recognized contribution is one enactment event — bringing a piece of constitutional intent into reality. Enactment is non-transferable (not a token, not currency), serves as the basis for advancing standing, and is recorded across all Sub-Leviathans the participant engages with.
 
 <!-- BELOW THIS LINE: editorial context. Not stored on-chain. -->
 

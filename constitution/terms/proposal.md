@@ -25,7 +25,7 @@ DRAFT → DISCUSSION → VOTING → ACCEPTED | REJECTED | WITHDRAWN
 - **DRAFT** — authored and visible in the forum; evidence attached; awaiting transition to DISCUSSION.
 - **DISCUSSION** — open for `rule_dialectic_format` to apply; minimum 7 days; thesis/antithesis/synthesis recorded.
 - **VOTING** — opens only after synthesis posted; thresholds and quorum per Phase 2 amendment.
-- **ACCEPTED** — ratified to the on-chain `ConstitutionalRegistry`; element's `current_version` updated.
+- **ACCEPTED** — recorded in the append-only constitutional registry (forum-anchored today; on-chain anchoring is a declared, not-yet-live target); element's `current_version` updated.
 - **REJECTED** — vote failed; proposal closed with permanent record; new proposal may re-attempt.
 - **WITHDRAWN** — proposer (or successor with `guardian` standing) closes the proposal at any pre-VOTING stage.
 

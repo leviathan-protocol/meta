@@ -7,7 +7,7 @@ current_version: 1
 contentURI: null
 ---
 
-Users grant initial consent by bonding with an agent and defining its operating boundaries. After that, the agent acts independently within those bounds. The validator network ensures the agent stays within bounds — not the user checking every action. Users retain absolute revocation rights through unbonding.
+Users grant initial consent by binding an agent to declared operating boundaries. After that, the agent acts independently within those bounds. The witness network keeps the agent inside those bounds — not the user checking every action. Users retain absolute revocation rights, exercised at any time.
 
 <!-- BELOW THIS LINE: editorial context. Not stored on-chain. -->
 

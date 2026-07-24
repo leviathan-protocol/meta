@@ -23,7 +23,7 @@ Each transition is gated:
 | (new) → **DRAFT** | Proposer holds at least `sentinel` standing; required fields present (target, current_version, proposed_version, justification, evidence) | Submission rejected |
 | **DRAFT → DISCUSSION** | `rule_evidence_required` satisfied (or exemption verified by `guardian`); proposer requests transition | DRAFT-BLOCKED until satisfied |
 | **DISCUSSION → VOTING** | `rule_dialectic_format` satisfied (thesis + antithesis-or-no-objections-logged + synthesis present, in order, minimum 7 days elapsed) | Transition refused by forum tooling |
-| **VOTING → ACCEPTED \| REJECTED** | Voting thresholds and quorum per Phase 2 amendment (`rule_consensus_threshold`, `rule_quorum_requirement`); recorded on-chain | Default to REJECTED on quorum failure |
+| **VOTING → ACCEPTED \| REJECTED** | Voting thresholds and quorum per Phase 2 amendment (`rule_consensus_threshold`, `rule_quorum_requirement`); recorded in the append-only registry (forum-anchored; on-chain anchoring declared/not-yet-live) | Default to REJECTED on quorum failure |
 | **DRAFT \| DISCUSSION → WITHDRAWN** | Proposer initiates, OR a `guardian` initiates with cause (e.g., proposer inactive 30+ days) | — |
 
 A proposal cannot skip phases. A proposal cannot return to an earlier phase except via WITHDRAWN (which terminates the proposal; the proposer may submit a fresh proposal as a new DRAFT).
